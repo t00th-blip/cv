@@ -1,6 +1,6 @@
 ---
 title: "Resume"
-author: "[YOUR NAME]"
+author: "Mariana Ozaeta"
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
