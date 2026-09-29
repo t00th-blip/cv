@@ -1,67 +1,55 @@
 ---
 title: "Resume"
 author: "Mariana Ozaeta"
-date: "`r Sys.Date()`"
 output:
-  pagedown::html_resume:
-    css: ['css/custom_resume.css', 'css/styles.css', 'resume']
-    # set it to true for a self-contained HTML page but it'll take longer to render
+  html_document:
+    theme: readable
     self_contained: true
 ---
 
-
-```{r, include=FALSE}
-knitr::opts_chunk$set(
-  results='asis', 
-  echo = FALSE
-)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(results = 'asis', echo = FALSE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(glue)
 
-# Set this to true to have links turned into footnotes at the end of the document
 PDF_EXPORT <- FALSE
-
-# Holds all the links that were inserted for placement at the end
 links <- c()
 
 source('parsing_functions.R')
 
-
-# First let's get the data, filtering to only the items tagged as
-# Resume items
-position_data <- read_csv('positions.csv') %>% 
-  filter(in_resume) %>% 
+position_data <- read_csv('positions.csv', show_col_types = FALSE) %>%
+  filter(in_resume) %>%
   mutate(
-    # Build some custom sections by collapsing others
     section = case_when(
-      section %in% c('research_positions', 'industry_positions') ~ 'positions', 
-      section %in% c('projects') ~ 'projects',
+      section %in% c('research_positions', 'industry_positions') ~ 'positions',
       TRUE ~ section
     )
-  ) 
-
+  )
 ```
 
+<div class="name-block">
+# Mariana Ozaeta {.title-name}
+Graduate student in Program Evaluation & Data Analytics at Arizona State
+University, currently working in nonprofit administration and development
+research. I keep donor and program records accurate in Salesforce, research
+giving prospects for a development team, and analyze program data in R.
 
-Aside
-================================================================================
+Looking for a program evaluation or data analyst role in the nonprofit or
+public sector.
+</div>
 
+<div class="resume-grid">
 
-Contact {#contact}
---------------------------------------------------------------------------------
+<div class="sidebar">
 
+## Contact
 
-- <i class="fa fa-envelope"></i> [your.email@asu.edu]
-- <i class="fa fa-phone"></i> [(555) 555-5555]
-- <i class="fa fa-github"></i> github.com/[your-github-id]
-- <i class="fa fa-link"></i> [your-github-id.github.io/cv](https://your-github-id.github.io/cv)
+- <i class="fa fa-envelope"></i> mozaeta@asu.edu
+- <i class="fa fa-phone"></i> (602) 663-5048
+- <i class="fa fa-github"></i> github.com/t00th-blip
 - <i class="fa fa-map-marker"></i> Phoenix, AZ
 
-
-
-Skills {#skills}
---------------------------------------------------------------------------------
-
+## Skills
 
 ```{r}
 skills <- tribble(
@@ -75,70 +63,87 @@ skills <- tribble(
 build_skill_bars(skills)
 ```
 
-
-
-Certifications {#certifications}
---------------------------------------------------------------------------------
+## Certifications
 
 - IRB / Human Subjects Research certification
 - Salesforce donor records and reporting
 
+## Note
 
-
-Disclaimer {#disclaimer}
---------------------------------------------------------------------------------
-
-**Note:** this resume was built for a course assignment (PAF 514). Entries marked
+This resume was built for a course assignment (PAF 514). Entries marked
 *ASPIRATIONAL ENTRY* are fictional examples, not actual work history.
 
-Made w/ [**pagedown**](https://github.com/rstudio/pagedown).
+</div>
 
-Last updated on `r Sys.Date()`.
+<div class="main-col">
 
-
-
-
-Main
-================================================================================
-
-[YOUR NAME] {#title}
---------------------------------------------------------------------------------
-
-```{r}
-intro_text <- "Graduate student in Program Evaluation & Data Analytics at Arizona State University,
-currently working in nonprofit administration and development research. I keep donor and program
-records accurate in Salesforce, research giving prospects for a development team, and analyze
-program data in R.
-
-Looking for a program evaluation or data analyst role in the nonprofit or public sector.
-"
-
-cat(sanitize_links(intro_text))
-```
-
-
-
-Education {data-icon=graduation-cap data-concise=true}
---------------------------------------------------------------------------------
+## Education
 
 ```{r}
 position_data %>% print_section('education')
 ```
 
-
-
-Experience {data-icon=suitcase}
---------------------------------------------------------------------------------
+## Experience
 
 ```{r}
 position_data %>% print_section('positions')
 ```
 
-
-
-Projects {data-icon=laptop}
---------------------------------------------------------------------------------
+## Projects
 
 ```{r}
 position_data %>% print_section('projects')
+```
+
+</div>
+</div>
+
+```{css, echo=FALSE}
+body { max-width: 1000px; }
+
+.name-block { border-bottom: 2px solid #314f96; margin-bottom: 24px; }
+
+h1.title, .name-block h1 {
+  color: #314f96;
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 40px;
+}
+
+.sidebar h2, .main-col h2 {
+  color: #314f96;
+  font-size: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+  margin-top: 26px;
+}
+
+.sidebar ul { list-style: none; padding-left: 0; font-size: 14px; }
+
+.main-col h3 {
+  font-size: 17px;
+  margin-bottom: 2px;
+  color: #222;
+}
+
+.main-col p { margin: 2px 0; font-size: 14px; color: #555; }
+.main-col ul { margin-top: 6px; font-size: 14px; color: #333; }
+
+.skill-bar {
+  color: white;
+  padding: 3px 6px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  border-radius: 2px;
+  text-shadow: 0 0 2px #333;
+}
+
+@media only screen and (max-width: 700px) {
+  .resume-grid { grid-template-columns: 1fr; }
+}
 ```
