@@ -1,6 +1,6 @@
 ---
 title: "Resume"
-author: "[YOUR NAME]"
+author: "Mariana Ozaeta"
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
@@ -51,10 +51,10 @@ Contact {#contact}
 --------------------------------------------------------------------------------
 
 
-- <i class="fa fa-envelope"></i> [your.email@asu.edu]
-- <i class="fa fa-phone"></i> [(555) 555-5555]
-- <i class="fa fa-github"></i> github.com/[your-github-id]
-- <i class="fa fa-link"></i> [your-github-id.github.io/cv](https://your-github-id.github.io/cv)
+- <i class="fa fa-envelope"></i> [mozaeta@asu.edu]
+- <i class="fa fa-phone"></i> [(602) 663-5048]
+- <i class="fa fa-github"></i> github.com/[t00th-blip]
+- <i class="fa fa-link"></i> [https://t00th-blip.github.io/cv/](https://t00th-blip.github.io/cv/)
 - <i class="fa fa-map-marker"></i> Phoenix, AZ
 
 
@@ -101,7 +101,7 @@ Last updated on `r Sys.Date()`.
 Main
 ================================================================================
 
-[YOUR NAME] {#title}
+Mariana Ozaeta Student
 --------------------------------------------------------------------------------
 
 ```{r}
